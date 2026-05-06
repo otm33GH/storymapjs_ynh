@@ -70,7 +70,7 @@ ynh_config_add_nginx
 
 
 ynh_config_add_systemd --service="$app" --template="$app.service"
-ynh_config_add_systemd --service="$app-huey" --template="$app.huey.service"
+ynh_config_add_systemd --service="$app-huey" --template="$app-huey.service"
 
 yunohost service add "$app-huey" --description="$app" --log="/var/log/$app/$app.log"
 yunohost service add "$app-huey" --description="$app-huey" --log="/var/log/$app/$app-huey.log"
