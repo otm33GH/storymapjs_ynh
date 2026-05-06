@@ -1,0 +1,50 @@
+--- a/smjs-src/storymap/core/settings.py	
++++ b/smjs-src/storymap/core/settings.py	
+@@ -13,11 +13,6 @@
+ STATIC_URL = env['STATIC_URL']
+ CDN_URL = env['CDN_URL']
+ 
+-
+-# Default database `pg` is setup for local execution via docker-compose where the
+-# postgresql service host is set to `pg`. To run migrations, set the `PG_HOST`
+-# environment variable to localhost if executing the scription outside of the docker
+-# compose stack.
+ DATABASES = {
+     'pg': {
+         'HOST': env.get('PG_HOST', 'pg'),
+@@ -29,17 +24,24 @@
+ }
+ 
+ AWS_STORAGE_BUCKET_NAME = env['AWS_STORAGE_BUCKET_NAME']
+-AWS_STORAGE_BUCKET_URL = env['AWS_STORAGE_BUCKET_URL']
+-
+-AWS_STORAGE_BUCKET_KEY = env['AWS_STORAGE_BUCKET_KEY']
+-AWS_ACCESS_KEY_ID = env['AWS_ACCESS_KEY_ID']
+-AWS_SECRET_ACCESS_KEY = env['AWS_SECRET_ACCESS_KEY']
+-AWS_ENDPOINT_URL = env.get('AWS_ENDPOINT_URL')
+-GOOGLE_CLIENT_ID = env['GOOGLE_CLIENT_ID']
+-GOOGLE_CLIENT_SECRET = env['GOOGLE_CLIENT_SECRET']
+-ADMINS = env['ADMINS'].split(' ')
++AWS_STORAGE_BUCKET_URL  = env['AWS_STORAGE_BUCKET_URL']
++AWS_STORAGE_BUCKET_KEY  = env['AWS_STORAGE_BUCKET_KEY']
++AWS_ACCESS_KEY_ID       = env['AWS_ACCESS_KEY_ID']
++AWS_SECRET_ACCESS_KEY   = env['AWS_SECRET_ACCESS_KEY']
++AWS_ENDPOINT_URL        = env.get('AWS_ENDPOINT_URL')
++
++# Google OAuth 
++GOOGLE_CLIENT_ID     = env.get('GOOGLE_CLIENT_ID', '')
++GOOGLE_CLIENT_SECRET = env.get('GOOGLE_CLIENT_SECRET', '')
+ 
++ADMINS = env.get('ADMINS', '').split(' ')
+ 
+-STORYMAPJS_DIRECTORY = env['STORYMAPJS_DIRECTORY']
++STORYMAPJS_DIRECTORY  = env['STORYMAPJS_DIRECTORY']
+ FLASK_SETTINGS_MODULE = env['FLASK_SETTINGS_MODULE']
+-STORYMAP_JS_FILE = env.get('STORYMAP_JS_FILE', 'storymap-min.js')
++STORYMAP_JS_FILE      = env.get('STORYMAP_JS_FILE', 'storymap-min.js')
++
++# Authengtication with ssowat
++# "ssowat"  → login via le header HTTP_REMOTE_USER posé par SSOwat (défaut YNH)
++# "google"  → comportement original (Google OAuth)
++# "test"    → utilisateur unique fixe (TEST_MODE)
++YNH_AUTH_MODE = env.get('YNH_AUTH_MODE', 'ssowat')
