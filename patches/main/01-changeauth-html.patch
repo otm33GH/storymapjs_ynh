@@ -1,0 +1,17 @@
+--- a/smjs-src/storymap/templates/select.html	
++++ b/smjs-src/storymap/templates/select.html	
+@@ -80,7 +80,14 @@
+         <div class="entry-panel entry-login hide">
+             <div>
+                 <div>
++                    {% if config.get('YNH_AUTH_MODE', 'ssowat') == 'ssowat' %}
++                    <a id="entry_login" href="{{ url_for('google_auth_start') }}"
++                       style="display:inline-block;padding:10px 20px;background:#3a3a3a;color:#fff;border-radius:4px;text-decoration:none;font-family:sans-serif;font-size:14px;">
++                      se connecter via yunohost
++                    </a>
++                    {% else %}
+                     <a id="entry_login" href="{{ url_for('google_auth_start') }}" ></a>
++                    {% endif %}
+                     <p class="ui-note">The StoryMapJS editor uses your Google account for logging in,
+                       so that only you can edit your projects, and
+                       so that you don't need to remember another password.
