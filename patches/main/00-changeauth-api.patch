@@ -1,5 +1,5 @@
---- smjs-src/storymap/api.py	2026-05-06 10:47:56.505237176 +0000
-+++ smjs-src/storymap/api.py	2026-05-06 10:51:45.975519426 +0000
+--- a/smjs-src/storymap/api.py	2026-05-06 10:47:56.505237176 +0000
++++ b/smjs-src/storymap/api.py	2026-05-06 10:51:45.975519426 +0000
 @@ -43,6 +43,7 @@
  from .connection import get_user, save_user, create_user, find_users, pg_conn
  from . import googleauth
@@ -15,11 +15,11 @@
 -    """Initiate google authorization"""
 +    """Initiate authorization — Google OAuth or SSOwat depending on YNH_AUTH_MODE."""
 +    if settings.YNH_AUTH_MODE == 'ssowat':
-+        # SSOwat gère l'auth en amont via nginx ; on redirige juste vers /select/
++        # si ssowat
 +        uid = _ynh_auth.login_via_ssowat(db())
 +        if uid:
 +            return redirect(url_for('select'))
-+        # Pas de header SSOwat → l'utilisateur n'est pas connecté au portail YunoHost
++        # si pas ssowat
 +        return redirect('/yunohost/sso?r=' + url_for('select'))
 +    # Mode Google OAuth original
      flow = OAuth2WebServerFlow(
