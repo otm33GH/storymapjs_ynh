@@ -1,5 +1,5 @@
---- a/smjs-src/storymap/templates/select.html	
-+++ b/smjs-src/storymap/templates/select.html	
+--- smjs-src/storymap/templates/select.html	
++++ smjs-src/storymap/templates/select.html	
 @@ -80,7 +80,14 @@
          <div class="entry-panel entry-login hide">
              <div>
