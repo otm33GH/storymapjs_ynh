@@ -36,3 +36,4 @@
 +
 +def logout_url() -> str:
 +    return '/yunohost/sso?action=logout'
++
