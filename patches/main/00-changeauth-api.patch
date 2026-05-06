@@ -1,5 +1,5 @@
---- smjs-src/storymap/api.py	2026-05-06 10:47:56.505237176 +0000
-+++ smjs-src/storymap/api.py	2026-05-06 10:51:45.975519426 +0000
+--- storymap/api.py	2026-05-06 10:47:56.505237176 +0000
++++ storymap/api.py	2026-05-06 10:51:45.975519426 +0000
 @@ -43,6 +43,7 @@
  from .connection import get_user, save_user, create_user, find_users, pg_conn
  from . import googleauth
