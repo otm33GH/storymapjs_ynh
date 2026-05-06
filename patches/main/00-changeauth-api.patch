@@ -1,0 +1,57 @@
+--- smjs-src/storymap/api.py	2026-05-06 10:47:56.505237176 +0000
++++ smjs-src/storymap/api.py	2026-05-06 10:51:45.975519426 +0000
+@@ -43,6 +43,7 @@
+ from .connection import get_user, save_user, create_user, find_users, pg_conn
+ from . import googleauth
+ from . import storage
++from . import ynh_auth as _ynh_auth
+ 
+ 
+ def db():
+@@ -235,7 +236,15 @@
+ 
+ @app.route("/google/auth/start/", methods=['GET', 'POST'])
+ def google_auth_start():
+-    """Initiate google authorization"""
++    """Initiate authorization — Google OAuth or SSOwat depending on YNH_AUTH_MODE."""
++    if settings.YNH_AUTH_MODE == 'ssowat':
++        # SSOwat gère l'auth en amont via nginx ; on redirige juste vers /select/
++        uid = _ynh_auth.login_via_ssowat(db())
++        if uid:
++            return redirect(url_for('select'))
++        # Pas de header SSOwat → l'utilisateur n'est pas connecté au portail YunoHost
++        return redirect('/yunohost/sso?r=' + url_for('select'))
++    # Mode Google OAuth original
+     flow = OAuth2WebServerFlow(
+         settings.GOOGLE_CLIENT_ID,
+         settings.GOOGLE_CLIENT_SECRET,
+@@ -334,6 +343,12 @@
+             create_user('test', 'Test User', db=db())
+         session['uid'] = 'test'
+ 
++def check_ssowat_user():
++    """Auto-login via SSOwat si le header HTTP_REMOTE_USER est présent."""
++    if settings.YNH_AUTH_MODE == 'ssowat':
++        if not session.get('uid'):
++            _ynh_auth.login_via_ssowat(db())
++
+ def require_user(f):
+     """
+     Decorator to enforce authenticated user
+@@ -952,6 +967,8 @@
+ @app.route("/logout/")
+ def logout():
+     _session_pop('uid')
++    if settings.YNH_AUTH_MODE == 'ssowat':
++        return redirect(_ynh_auth.logout_url())
+     return redirect('https://www.google.com/accounts/Logout')
+ 
+ @app.route("/userinfo/")
+@@ -990,6 +1007,7 @@
+ @app.route("/select/", methods=['GET', 'POST'])
+ def select():
+     check_test_user()
++    check_ssowat_user()
+     try:
+         uid = session.get('uid')
+         if not uid:
