@@ -52,7 +52,7 @@ pushd "$install_dir"
   ynh_hide_warnings pip install -r requirements.txt
   deactivate
 
-  ynh_hide_warnings ynh_exec_as_app  npm ci --prefer-offline
+  ynh_hide_warnings ynh_exec_as_app  npm --prefer-offline
   ynh_hide_warnings ynh_exec_as_app npm run build
 
 popd
