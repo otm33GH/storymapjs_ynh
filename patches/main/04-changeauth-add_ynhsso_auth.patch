@@ -1,5 +1,5 @@
 --- /dev/null	2026-05-05 07:58:54.444799032 +0000
-+++ smjs-src/storymap/ynh_auth.py	2026-05-06 10:51:28.311284045 +0000
++++ storymap/ynh_auth.py	2026-05-06 10:51:28.311284045 +0000
 @@ -0,0 +1,38 @@
 +import hashlib
 +from flask import session, request, current_app
