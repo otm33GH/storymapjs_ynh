@@ -1,5 +1,5 @@
---- a/smjs-src/storymap/core/settings.py	
-+++ b/smjs-src/storymap/core/settings.py	
+--- smjs-src/storymap/core/settings.py	
++++ smjs-src/storymap/core/settings.py	
 @@ -13,11 +13,6 @@
  STATIC_URL = env['STATIC_URL']
  CDN_URL = env['CDN_URL']
