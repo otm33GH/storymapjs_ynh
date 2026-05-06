@@ -14,7 +14,7 @@ source /usr/share/yunohost/helpers
 # If you need to, you can define custom settings
 # (or remove this section entirely if not relevant for you)
 secret_key=$(ynh_string_random --length=50)
-ynh_app_setting_set  --key=secret_key --value="$secret_key
+ynh_app_setting_set  --key=secret_key --value="$secret_key"
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
