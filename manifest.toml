@@ -36,11 +36,6 @@ ram.runtime = "50M"
     # this is a generic question - ask strings are automatically handled by YunoHost's core
     type = "domain"
 
-    [install.path]
-    # this is a generic question - ask strings are automatically handled by YunoHost's core
-    type = "path"
-    default = "/storymapjs"
-
     [install.auth_mode]
     ask.en = "Authentication mode"
     ask.fr = "Mode d'authentification"
