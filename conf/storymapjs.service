@@ -8,13 +8,9 @@ User=__APP__
 Group=__APP__
 WorkingDirectory=__INSTALL_DIR__/
 EnvironmentFile=__INSTALL_DIR__/.env
+Environment="FLASK_SETTINGS_MODULE=storymap.core.settings"
 Environment="PATH=__INSTALL_DIR__/venv/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-ExecStart=__INSTALL_DIR__/venv/bin/gunicorn \
-    --bind 127.0.0.1:__PORT__ \
-    --workers 2 \
-    --threads 4 \
-    --timeout 120 \
-    --log-level info \
+ExecStart=__INSTALL_DIR__/venv/bin/gunicorn storymap.api:app --bind 127.0.0.1:__PORT__ --workers 2 --threads 4 --timeout 120 --log-level info
 StandardOutput=append:/var/log/__APP__/__APP__.log
 StandardError=inherit
 SyslogIdentifier=__APP__
