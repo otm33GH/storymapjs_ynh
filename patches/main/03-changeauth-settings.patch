@@ -1,5 +1,5 @@
---- storymap/core/settings.py	
-+++ storymap/core/settings.py	
+--- a/storymap/core/settings.py	
++++ b/storymap/core/settings.py	
 @@ -13,11 +13,6 @@
  STATIC_URL = env['STATIC_URL']
  CDN_URL = env['CDN_URL']
