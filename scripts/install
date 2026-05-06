@@ -62,6 +62,11 @@ pushd "$install_dir"
   ynh_hide_warnings ynh_exec_as_app npm run build
 
   ynh_psql_db_shell "$db_name" < "$install_dir/scripts/schema.sql"
+ynh_psql_db_shell "$db_name" <<< "
+ALTER TABLE users OWNER TO $db_user;
+GRANT ALL PRIVILEGES ON TABLE users TO $db_user;
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO $db_user;
+"
 popd
 
 
