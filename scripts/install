@@ -61,8 +61,7 @@ pushd "$install_dir"
   ynh_hide_warnings ynh_exec_as_app  npm install --prefer-offline
   ynh_hide_warnings ynh_exec_as_app npm run build
 
-  ynh_psql_execute_as_root --database="$db_name" --sql_file="$install_dir/scripts/schema.sql"
-
+  ynh_psql_db_shell "$db_name" < "$install_dir/scripts/schema.sql"
 popd
 
 
