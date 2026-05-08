@@ -10,9 +10,6 @@ source /usr/share/yunohost/helpers
 # REMOVE SYSTEM CONFIGURATION
 #=================================================
 
-
-ynh_config_remove_fail2ban
-
 ynh_config_remove_logrotate
 
 ynh_systemctl --service="$app" --action="stop"
