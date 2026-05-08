@@ -1,0 +1,15 @@
+--- edit_orig.html	2025-11-05 20:02:17.000000000 +0000
++++ edit.html	2026-05-08 10:20:48.421210566 +0000
+@@ -1509,10 +1509,10 @@
+             var embed_url = '';
+ 
+             if(_storymap_meta.draft_on > _storymap_meta.published_on) {
+-                embed_url = 'https:'+storymap_url(_user.uid, _storymap_meta.id, 'draft.html');
++                embed_url = storymap_url(_user.uid, _storymap_meta.id, 'draft.html');
+                 $('#share_publish_panel').show();
+             } else {
+-                embed_url = 'https:'+storymap_url(_user.uid, _storymap_meta.id, 'index.html');
++                embed_url = storymap_url(_user.uid, _storymap_meta.id, 'index.html');
+                 $('#share_publish_panel').hide();
+             }
+ 
