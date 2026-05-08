@@ -39,6 +39,10 @@ ram.runtime = "50M"
     [install.init_main_permission]
     type = "group"
     default = "all_users"
+
+    [install.path]
+    type = "path"
+    default = "/storymapjs"
     
     [install.auth_mode]
     ask.en = "Authentication mode"
